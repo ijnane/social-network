@@ -1,13 +1,11 @@
 from django.conf.urls import url
-
+from django.contrib.auth import views as auth_views
 from . import views
 
-app_name = 'groups'
+app_name = 'accounts'
 
 urlpatterns = [
-    url(r"^$", views.ListGroups.as_view(), name="all"),
-    url(r"^new/$", views.CreateGroup.as_view(), name="create"),
-    url(r"^posts/in/(?P<slug>[-\w]+)/$",views.SingleGroup.as_view(),name="single"),
-    url(r"join/(?P<slug>[-\w]+)/$",views.JoinGroup.as_view(),name="join"),
-    url(r"leave/(?P<slug>[-\w]+)/$",views.LeaveGroup.as_view(),name="leave"),
+    url(r'login/$', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    url(r'logout/$', auth_views.LogoutView.as_view(), name='logout'),
+    url(r'signup/$', views.SignUp.as_view(), name='signup'),
 ]
